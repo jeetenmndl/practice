@@ -2,12 +2,13 @@
 import Card1 from "@/../public/card1.svg"
 import Card2 from "@/../public/card2.svg"
 import Card3 from "@/../public/card3.svg"
-import PeopleList from "@/components/section/peopleList";
 
 import Image from "next/image";
 
 export default function Home() {
+
   return (
+    <>
    
     <main className=' px-2 md:px-6 lg:px-12 xl:px-28 md:pt-8 flex flex-col-reverse lg:flex-row gap-8 xl:gap-12 md:justify-between'>
 
@@ -75,9 +76,9 @@ export default function Home() {
 
     <section className="lg:w-1/3 px-2 md:px-0 pt-4 lg:pt-0">
       {/* <IssueForm /> */}
-      <PeopleList />
     </section>
   
  </main>
+ </>
   );
 }

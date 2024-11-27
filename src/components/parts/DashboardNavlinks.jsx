@@ -15,11 +15,10 @@ const DashboardNavLinks = () => {
 
     const navLinks= [
         {name: "Home", href: `/`},
-        {name: "Transactions", href: `/dashboard/${projectID}/transactions`},
-        {name: "Insights", href: `/dashboard/${projectID}/insights`},
-        {name: "History", href: `/dashboard/${projectID}/history`},
-        {name: "Settlement", href: `/dashboard/${projectID}/settlement`},
-        {name: "Settings", href: `/dashboard/${projectID}/settings`},
+        {name: "My Issues", href: `/my-issues`},
+        {name: "Relations", href: `/relations`},
+        {name: "Ask Mitra", href: `/mitra`},
+        {name: "Psychiatrist", href: `/therapy`},
     ]
     
 

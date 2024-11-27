@@ -1,5 +1,6 @@
 'use client';
 
+import { ScanFace } from 'lucide-react';
 import { useState, useRef } from 'react';
 import Webcam from 'react-webcam';
 
@@ -11,6 +12,7 @@ export default function SelfieCapture({ setSelfieImage, selfieImage }) {
     const imageSrc = webcamRef.current.getScreenshot();
     setSelfieImage(imageSrc);
     setIsCameraOpen(false);
+    console.log(imageSrc)
   };
 
   return (
@@ -22,14 +24,20 @@ export default function SelfieCapture({ setSelfieImage, selfieImage }) {
       >
         {isCameraOpen ? 'Close Camera' : 'Open Selfie Camera'}
       </button>
+
       {isCameraOpen && (
         <div>
+          <div className='relative max-w-96'>
           <Webcam
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            className="mb-2"
+            className="mb-2 max-w-96"
           />
+
+          <ScanFace strokeWidth={0.5} size={150} className='text-gray-300 absolute top-16 left-32' />
+          </div>
+
           <button
             type="button"
             onClick={captureImage}
@@ -39,9 +47,10 @@ export default function SelfieCapture({ setSelfieImage, selfieImage }) {
           </button>
         </div>
       )}
+
       {selfieImage && !isCameraOpen && (
         <div>
-          <img src={selfieImage} alt="Captured selfie" className="max-w-xs mt-2" />
+          <img src={selfieImage} alt="Captured selfie" className="max-w-96 mt-2" />
           <button
             type="button"
             onClick={() => setIsCameraOpen(true)}
@@ -51,6 +60,7 @@ export default function SelfieCapture({ setSelfieImage, selfieImage }) {
           </button>
         </div>
       )}
+      
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import Logo from "@/../public/logo.png"
 import ProfileInfo from "@/components/section/ProfileInfo"
-import VerificationForm from "@/components/section/VerificationForm"
+import ProfileForm from "@/components/section/ProfileForm"
 // import { auth, currentUser } from '@clerk/nextjs/server';
 import React from 'react'
 
@@ -35,17 +35,16 @@ const data = {
 
 
   return (
-    <main className='px-20 py-20 '>
+    <main className='px-28 py-12 '>
     {
 
-      data?
+      !data?
       <section className="flex gap-6">
       <ProfileInfo data={data} image={Logo} />
-      <VerificationForm className="w-full" />
       </section>
       :
-        <section className='px-24 pt-8 flex justify-center'>
-          {/* <KycFormSection /> */}
+        <section className=''>
+          <ProfileForm />
         </section>
     }
 

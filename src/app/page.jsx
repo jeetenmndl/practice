@@ -39,7 +39,7 @@ export default function Home() {
       
       <div className="border lg:h-96 p-5 lg:p-3 bg-orange-100">
         <h3 className="font-medium text-2xl">Track Down the Resolution</h3>
-      <p className="text-xs text-gray-600 pt-2">Track down the resolution of shared issues, ensuring continuous support and effective solutions for student mental well-being.</p>
+      <p className="text-xs text-gray-600 pt-2">Track down the resolution of shared issues, ensuring continuous support and effective solutions.</p>
       <hr className="border-blue-200 mt-5" />
       <div className="w-full px-8 py-4">
         <Image src={Card3} className="w-full " alt="card1" />

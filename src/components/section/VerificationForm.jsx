@@ -28,7 +28,7 @@ export default function VerificationForm() {
   };
 
   return (
-    <Card className="w-1/3">
+    <Card>
     <form onSubmit={handleSubmit} className="space-y-4">
         <CardContent>
       <DocumentUpload setDocumentImage={setDocumentImage} />

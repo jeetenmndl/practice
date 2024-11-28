@@ -12,7 +12,7 @@ export default function SelfieCapture({ setSelfieImage, selfieImage }) {
     const imageSrc = webcamRef.current.getScreenshot();
     setSelfieImage(imageSrc);
     setIsCameraOpen(false);
-    console.log(imageSrc)
+    // console.log(imageSrc)
   };
 
   return (

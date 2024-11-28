@@ -10,7 +10,7 @@ export default function DocumentUpload({ setDocumentImage }) {
     if (file) {
       setDocumentImage(file);
       // setPreviewUrl(URL.createObjectURL(file));
-      console.log(file)
+      // console.log(file)
     }
   };
 

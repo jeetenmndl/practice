@@ -32,6 +32,7 @@ import { Input } from '../ui/input'
 import { useToast } from '@/hooks/use-toast'
 import DocumentUpload from './DocumentUpload'
 import SelfieCapture from './SelfieCapture'
+import postUser from '@/lib/actions/postUser'
   
 
 
@@ -39,7 +40,7 @@ const formSchema = z.object({
     address: z.string().min(3, {
       message : "Enter proper address.",
     }),
-    age: z.number().min(1, {
+    age: z.string().min(1, {
         message : "Enter proper age.",
     }),
     character: z.string().min(3, {
@@ -70,7 +71,11 @@ const ProfileForm = () => {
 
     // 2. Define a submit handler.
     async function onSubmit(values) {
-        console.log("values are:", values);
+        
+      const response = await postUser(values, documentImage, selfieImage);
+      console.log(response)
+        
+
     }
 
   return (

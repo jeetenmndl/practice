@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { User, Mail, Phone, MapPin, CreditCard, CheckCircle2 } from "lucide-react"
+import { User, Mail, Phone, MapPin, CreditCard, CheckCircle2, ImageDown } from "lucide-react"
 import Image from "next/image"
 
 
@@ -9,11 +9,11 @@ export default function ProfileInfo({data, image}) {
   return (
       <Card className="w-2/3 mx-auto">
         <CardHeader className="flex flex-row items-center gap-4">
-          <Image src={image} alt={data.name+"Rupee API"} className="w-20 h-20 rounded-full" />
+          <Image src={image} alt={data.name+" Sambandha"} className="w-20 h-20 rounded-full" />
             
           <div className="flex-1">
             <CardTitle className="text-2xl">{data.name}</CardTitle>
-            <CardDescription>KYC Information</CardDescription>
+            <CardDescription>User Information</CardDescription>
           </div>
           <Badge className={data.status === "verified" ? "bg-green-600 ml-auto" : "bg-orange-600 ml-auto"}>
             {data.status === "verified" ? (
@@ -26,18 +26,18 @@ export default function ProfileInfo({data, image}) {
         <CardContent className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InfoItem icon={<Mail className="w-4 h-4" />} label="Email" value={data.email} />
-            <InfoItem icon={<Phone className="w-4 h-4" />} label="Phone" value={data.phone} />
+            <InfoItem icon={<User className="w-4 h-4" />} label="Character" value={data.character} />
           </div>
           <Separator />
           <InfoItem icon={<MapPin className="w-4 h-4" />} label="Address" value={data.address} />
           <Separator />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InfoItem icon={<CreditCard className="w-4 h-4" />} label="ID Type" value={data.idType} />
-            <InfoItem icon={<User className="w-4 h-4" />} label="ID Number" value={data.idNumber} />
+            <InfoItem icon={<CreditCard className="w-4 h-4" />} label="Age" value={data.age} />
+            <InfoItem icon={<ImageDown className="w-4 h-4" />} label="Document" value={data.docPhoto} />
           </div>
           <Separator />
           <div className="text-sm text-muted-foreground">
-            Submitted on: {data.date}
+            Submitted on: {data.createdAt}
           </div>
         </CardContent>
       </Card>

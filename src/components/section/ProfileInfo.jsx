@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { User, Mail, Phone, MapPin, CreditCard, CheckCircle2, ImageDown } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 
 export default function ProfileInfo({data, image}) {
@@ -12,7 +13,7 @@ export default function ProfileInfo({data, image}) {
           <Image src={image} alt={data.name+" Sambandha"} className="w-20 h-20 rounded-full" />
             
           <div className="flex-1">
-            <CardTitle className="text-2xl">{data.name}</CardTitle>
+            <CardTitle className="text-2xl">{data.firstName + " " + data.LastName}</CardTitle>
             <CardDescription>User Information</CardDescription>
           </div>
           <Badge className={data.status === "verified" ? "bg-green-600 ml-auto" : "bg-orange-600 ml-auto"}>
@@ -33,11 +34,11 @@ export default function ProfileInfo({data, image}) {
           <Separator />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InfoItem icon={<CreditCard className="w-4 h-4" />} label="Age" value={data.age} />
-            <InfoItem icon={<ImageDown className="w-4 h-4" />} label="Document" value={data.docPhoto} />
+            <InfoItem icon={<ImageDown className="w-4 h-4" />} label="Document" value={<Link className="underline" target="_blank" href={data.docPhoto}>See Photo</Link>} />
           </div>
           <Separator />
           <div className="text-sm text-muted-foreground">
-            Submitted on: {data.createdAt}
+            Submitted on: {data.createdAt.substring(0,10)}
           </div>
         </CardContent>
       </Card>

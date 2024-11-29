@@ -33,6 +33,7 @@ import { useToast } from '@/hooks/use-toast'
 import DocumentUpload from './DocumentUpload'
 import SelfieCapture from './SelfieCapture'
 import postUser from '@/lib/actions/postUser'
+import { Description } from '@radix-ui/react-toast'
   
 
 
@@ -73,7 +74,22 @@ const ProfileForm = () => {
     async function onSubmit(values) {
         
       const response = await postUser(values, documentImage, selfieImage);
+
       console.log(response)
+
+      if(response.success){
+        toast({
+          title: "Congratulations",
+          description:"Account Created Successfully"
+        })
+      }
+      else{
+        toast({
+          title: "OOPS!",
+          description: response.message,
+          variant: "destructive"
+        })
+      }
         
 
     }
@@ -121,7 +137,7 @@ const ProfileForm = () => {
                 <FormItem>
                 <FormLabel className="pt-1">Age</FormLabel>
                 <FormControl>
-                   <Input type="number" className="placeholder:text-gray-400 font-light" placeholder="Enter Title" {...field} />
+                   <Input type="number" className="placeholder:text-gray-400 font-light" placeholder="Enter Age" {...field} />
                 </FormControl>
                 {/* <FormDescription>
                     This is your public display name.

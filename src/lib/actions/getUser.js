@@ -14,14 +14,14 @@ const getUser = async ()=>{
 
   
     const settings = {
-      method: 'GET',
+      method: 'POST',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify(details)
   };
   
-    const query = await fetch(`${process.env.SERVER}/create_account_api`, settings)
+    const query = await fetch(`${process.env.SERVER}/getUser`, settings)
     const response = await query.json()
   
     return response

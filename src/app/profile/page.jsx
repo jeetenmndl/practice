@@ -3,29 +3,21 @@ import ProfileInfo from "@/components/section/ProfileInfo"
 import ProfileForm from "@/components/section/ProfileForm"
 import React from 'react'
 import getUser from "@/lib/actions/getUser"
+import { currentUser } from "@clerk/nextjs/server"
 
 const page = async () => {
 
-// const data = await getUser();
+const response = await getUser();
+// console.log(response);
+const data = response.success?response.data[0] : null;
 
-const data = {
-    name: "Jeeten Mandal",
-    address: "Biratnagar 10, Hong Kong",
-    createdAt: "2024-22-22",
-    status: "verified",
-    email: "jeeten123@gmail.com",
-    age: "19", 
-    docPhoto: "12345",
-    character: "son",
-
-}
 
 
   return (
     <main className='px-28 py-12 '>
     {
 
-      data?
+      response.success?
       <section className="flex gap-6">
       <ProfileInfo data={data} image={Logo} />
       </section>

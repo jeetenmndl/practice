@@ -1,26 +1,74 @@
 "use server"
 
 import { currentUser } from "@clerk/nextjs/server";
+import { v2 as cloudinary } from 'cloudinary';
+
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 
 const postUser = async (data,docPhoto, userPhoto)=>{
 
     const user = await currentUser();
+    // console.log(user)
 
     try {
+        // cloudinary upload for selfie 
+        const userResult = await fetch(`${process.env.DOMAIN}/api/cloudinary`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({base64: userPhoto})
+          
+          })
+            
+          const {url} = await userResult.json();
+
+
+
+        //   cloudinary upload for image 
+            const bytes = await docPhoto.arrayBuffer();
+          const buffer = Buffer.from(bytes);
+
+        const result = await new Promise((resolve, reject) => {
+            const uploadStream = cloudinary.uploader.upload_stream(
+              { 
+                folder: 'sambandha',
+                quality: 'auto:eco',
+                format: 'jpg',
+              },
+              (error, result) => {
+                if (error) reject(error);
+                else resolve(result);
+              }
+            );
+            uploadStream.end(buffer);
+          });
+
+          const docUrl = result.secure_url;
+
+            
+
+      
 
     let details = {
         userID: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
-        email: user.email,
+        email: user.emailAddresses[0].emailAddress,
         verified: false,
-        docPhoto: docPhoto,
-        userPhoto: userPhoto,
+        docPhoto: docUrl,
+        userPhoto: url,
         character: data.character,
         age: data.age,
         address: data.address,
-        createdAt: "123"
+        createdAt: "123",
+        password: "123"
     }
     console.log(details)
 
@@ -39,7 +87,10 @@ const postUser = async (data,docPhoto, userPhoto)=>{
     return response
 
 } catch (error) {
-        return error; 
+        return {
+            success: false,
+            message: error
+        }; 
 }
   }
 

@@ -1,6 +1,7 @@
 "use server"
 
 import { currentUser } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
 
 
 const postIssue = async (data)=>{
@@ -18,6 +19,8 @@ const postIssue = async (data)=>{
         private: data.private,
     }
 
+    console.log(details)
+
   
     const settings = {
       method: 'POST',
@@ -27,13 +30,19 @@ const postIssue = async (data)=>{
       body: JSON.stringify(details)
   };
   
-    const query = await fetch(`${process.env.SERVER}/create_account_api`, settings)
+    const query = await fetch(`${process.env.SERVER}/issue_api`, settings)
     const response = await query.json()
+   console.log(response)
+
+    revalidatePath("/my-issues");
   
     return response
 
 } catch (error) {
-        return error; 
+        return {
+            success: false,
+            message: error
+        }; 
 }
   }
 

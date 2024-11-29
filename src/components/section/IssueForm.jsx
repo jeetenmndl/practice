@@ -16,7 +16,7 @@ import {
     FormLabel,
     FormMessage,
   } from "@/components/ui/form"
-import { Input } from './ui/input'
+import { Input } from '../ui/input'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import {
@@ -28,7 +28,7 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-import { Textarea } from './ui/textarea'
+import { Textarea } from '../ui/textarea'
 import { useToast } from '@/hooks/use-toast'
 import { Switch } from '../ui/switch'
 import postIssue from '@/lib/actions/postIssue'
@@ -43,10 +43,10 @@ const formSchema = z.object({
     description: z.string().min(20, {
         message : "Text must be more than 20 characters.",
     }).max(250, {message: "Limit exceed, less than 500 characters allowed"}),
-    preferredCharacater: z.string().min(3, {
+    preferredCharacter: z.string().min(3, {
         message : "Choose one.",
     }),
-    private: z.boolean().optional()
+    private: z.boolean()
     
   })
 
@@ -66,20 +66,18 @@ const IssueForm = () => {
             description:"",
             preferredCharacter:"",
             private: false,
-
     },
     })
 
 
     // 2. Define a submit handler.
-    async function onSubmit(values) {
-        console.log("values are:", values);
+    async function submit(values) {
         try {
             setLoading(true);
             const response = await postIssue(values);
 
             console.log("in issue page", response);
-            if(response.success==true){
+            if(response.success){
                 toast({
                     title: "Congratulations !",
                     description: "Issue uploaded sucessfully.",
@@ -109,7 +107,7 @@ const IssueForm = () => {
   return (
     
     <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="sticky top-8 pb-8">
+    <form onSubmit={form.handleSubmit(submit) } className="sticky top-8 pb-8">
     <Card className="shadow-lg">
         <CardHeader>
             <CardTitle>Share your Issue</CardTitle>
@@ -196,12 +194,12 @@ const IssueForm = () => {
             {/* private  */}
             <FormField
             control={form.control}
-            name="wifi"
+            name="private"
             render={({ field }) => (
             <FormItem className="flex flex-row items-center justify-between">
             <div>
-                <FormLabel className="text-base">
-                Wi-Fi
+                <FormLabel>
+                Private
                 </FormLabel>
             </div>
             <FormControl>

@@ -2,6 +2,8 @@
 import Card1 from "@/../public/card1.svg"
 import Card2 from "@/../public/card2.svg"
 import Card3 from "@/../public/card3.svg"
+import Feed from "@/components/section/Feed";
+import IssueForm from "@/components/section/IssueForm";
 
 import Image from "next/image";
 
@@ -65,7 +67,7 @@ export default function Home() {
         <h2 className="text-3xl font-semibold ">Feeds Matching Your Character
         </h2>
         
-        {/* <Feed /> */}
+        <Feed />
       </div>
 
      
@@ -75,7 +77,7 @@ export default function Home() {
     </section>
 
     <section className="lg:w-1/3 px-2 md:px-0 pt-4 lg:pt-0">
-      {/* <IssueForm /> */}
+      <IssueForm />
     </section>
   
  </main>

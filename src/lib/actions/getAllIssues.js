@@ -8,7 +8,7 @@ const getAllIssues = async ()=>{
     const user = await currentUser();
 
     let details = {
-        userID: user.id,
+        userID: user?user.id:"none-0",
     }
     // console.log(details)
 

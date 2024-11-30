@@ -2,6 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs/server";
 import { v2 as cloudinary } from 'cloudinary';
+import { revalidatePath } from "next/cache";
 
 
 cloudinary.config({
@@ -63,7 +64,7 @@ const postUser = async (data,docPhoto, userPhoto)=>{
         email: user.emailAddresses[0].emailAddress,
         verified: false,
         docPhoto: docUrl,
-        userPhoto: url,
+        userPhoto: url || "https://images.pexels.com/photos/1416736/pexels-photo-1416736.jpeg?cs=srgb&dl=pexels-jonas-mohamadi-1416736.jpg&fm=jpg",
         character: data.character,
         age: data.age,
         address: data.address,
@@ -83,13 +84,14 @@ const postUser = async (data,docPhoto, userPhoto)=>{
   
     const query = await fetch(`${process.env.SERVER}/create_account_api`, settings)
     const response = await query.json()
+
+    revalidatePath("/profile");
   
     return response
 
 } catch (error) {
         return {
             success: false,
-            message: error
         }; 
 }
   }

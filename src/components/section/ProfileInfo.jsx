@@ -16,8 +16,8 @@ export default function ProfileInfo({data, image}) {
             <CardTitle className="text-2xl">{data.firstName + " " + data.LastName}</CardTitle>
             <CardDescription>User Information</CardDescription>
           </div>
-          <Badge className={data.status === "verified" ? "bg-green-600 ml-auto" : "bg-orange-600 ml-auto"}>
-            {data.status === "verified" ? (
+          <Badge className={data.isVerified ? "bg-green-600 ml-auto" : "bg-orange-600 ml-auto"}>
+            {data.isVerified ? (
               <><CheckCircle2 className="w-4 h-4 mr-1" /> Verified</>
             ) : (
               "Pending"

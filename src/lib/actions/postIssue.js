@@ -8,6 +8,13 @@ const postIssue = async (data)=>{
 
     const user = await currentUser();
 
+    if(!user || !user.id){
+        return {
+            success:false,
+            message: "Log in is required."
+        }
+    }
+
     try {
 
     let details = {
@@ -19,7 +26,7 @@ const postIssue = async (data)=>{
         private: data.private,
     }
 
-    console.log(details)
+    // console.log(details)
 
   
     const settings = {

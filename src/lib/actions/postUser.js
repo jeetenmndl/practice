@@ -59,6 +59,7 @@ const postUser = async (data,docPhoto, userPhoto)=>{
 
     let details = {
         userID: user.id,
+        username: data.username,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.emailAddresses[0].emailAddress,

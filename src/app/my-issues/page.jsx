@@ -1,40 +1,73 @@
-import getMyIssues from '@/lib/actions/getMyIssues'
-import { currentUser } from '@clerk/nextjs/server'
-import React from 'react'
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { ArrowBigDown, ArrowBigUp, MessageSquare, Share2, MoreVertical } from 'lucide-react'
-import PostItem from '@/components/parts/PostItem'
+import React from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import MyPosts from '@/components/parts/MyPosts';
+import getMyIssues from '@/lib/actions/getMyIssues';
 
 
-const page = async () => {
+const Page = async () => {
+    const issues = await getMyIssues();
+    // console.log(issues.data)
 
-  // const response = await getMyIssues();
-  const {id} = await currentUser();
-
-  console.log(id)
 
   return (
-    <div className="p-4 space-y-4">
-      <PostItem
-        communityName="r/NepalSocial"
-        timeAgo="19 hr. ago"
-        title="My parents are forcing me to get married"
-        content="My parents have started looking for a groom for me, but I can't marry someone I don't feel a connection with. Is there anyone who's open to getting married for their parents sake? We can live as friends with no expectations..."
-        votes={1}
-        comments={31}
-      />
-      <PostItem
-        communityName="r/AITAH"
-        timeAgo="6 hr. ago"
-        title="Wife had an affair when her sister passed away"
-        content="4 years ago, my SIL unexpectedly passed away. My wife was very close with her, and her sister's death affected her a lot..."
-        votes={348}
-        comments={272}
-      />
-      
-    </div>
-  )
-}
+    <main className='px-28 py-4 flex gap-4'>
 
-export default page
+    <section className='my-6 w-3/4'>
+      {
+        issues.success
+        ?
+
+        <>
+        <Tabs defaultValue="public">
+        <TabsList className=" mb-4">
+          <TabsTrigger value="public" className="px-20 ">Public</TabsTrigger>
+          <TabsTrigger value="private" className="px-20 ">Private</TabsTrigger>
+        </TabsList>
+        <TabsContent value="public">
+          <div className="grid grid-cols-2 gap-3">
+            {
+              issues.data.public_issues.map((item)=>{
+                return(
+                  <>
+                  <MyPosts key={item.id} data={item} />
+                  <MyPosts key={item.id+1} data={item} />
+                  <MyPosts key={item.id+2} data={item} />
+                  </>
+                )
+              })
+            }
+          </div>
+        </TabsContent>
+
+        <TabsContent value="private">
+        <div className="grid grid-cols-2 gap-2">
+        {
+          issues.data.private_issues.map((item)=>{
+            return(
+              <MyPosts key={item.id} data={item} />
+            )
+          })
+        }
+        </div>
+        </TabsContent>
+      </Tabs>
+       
+       
+        
+        </>
+
+        
+        :
+        "you dont have issues"
+      }
+    </section>
+
+    <aside className='w-1/4'>
+
+    </aside>
+    </main>
+
+  );
+};
+
+export default Page;

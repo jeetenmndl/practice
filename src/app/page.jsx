@@ -4,6 +4,7 @@ import Card2 from "@/../public/card2.svg"
 import Card3 from "@/../public/card3.svg"
 import Feed from "@/components/section/Feed";
 import IssueForm from "@/components/section/IssueForm";
+import Ngo from "@/components/section/Ngo";
 
 import Image from "next/image";
 
@@ -70,9 +71,6 @@ export default function Home() {
         <Feed />
       </div>
 
-     
-      <hr className="border-gray-300" />
-
       
     </section>
 
@@ -81,6 +79,17 @@ export default function Home() {
     </section>
   
  </main>
+
+ <Ngo />
+
+ <hr className="border-gray-300 mx-28 " />
+
+<div className="py-6 px-28">
+  <p className="text-gray-400 font-semibold">
+    Incodeable
+  </p>
+  
+</div>
  </>
   );
 }

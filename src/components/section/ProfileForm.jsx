@@ -47,6 +47,9 @@ const formSchema = z.object({
     character: z.string().min(3, {
         message : "Choose one character.",
     }),
+    username: z.string().min(3, {
+      message : "At least 3 letters.",
+  }),
     
   })
 
@@ -66,6 +69,7 @@ const ProfileForm = () => {
             address:"",
             character:"",
             age:"",
+            username:""
     },
     })
 
@@ -109,6 +113,24 @@ const ProfileForm = () => {
         <CardContent>
             
         <div className="space-y-4">
+
+           {/* username */}
+           <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+                <FormItem>
+                <FormLabel className="pt-1">Username</FormLabel>
+                <FormControl>
+                   <Input className="placeholder:text-gray-400 font-light" placeholder="Main road, Nepal" {...field} />
+                </FormControl>
+                <FormDescription>
+                    Make sure it does not disclose your identity.
+                </FormDescription>
+                <FormMessage />
+                </FormItem>
+            )}
+            />
 
             {/* address */}
             <FormField

@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card"
 import { ArrowBigDown, ArrowBigUp, MessageSquare, Share2, MoreVertical, Reply } from 'lucide-react'
 import { useState } from "react"
 
-export default function PostItem({data}) {
+export default function MyPosts({data}) {
 
   function timeAgo(inputDateTime) {
     const now = new Date();
@@ -89,12 +89,12 @@ export default function PostItem({data}) {
               data.private?
               <Button variant="secondary" size="sm" className=" group-hover:bg-white h-8 gap-2 rounded-full">
                 <Reply className="h-4 w-4" />
-                Reply
+                View Replies
               </Button>
               :
               <Button variant="secondary" size="sm" className=" group-hover:bg-white h-8 gap-2 rounded-full">
                 <MessageSquare className="h-4 w-4" />
-                Comment
+                View Comments
               </Button>
             }
           

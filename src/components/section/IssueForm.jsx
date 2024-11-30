@@ -42,7 +42,7 @@ const formSchema = z.object({
     }),
     description: z.string().min(20, {
         message : "Text must be more than 20 characters.",
-    }).max(250, {message: "Limit exceed, less than 500 characters allowed"}),
+    }).max(1000, {message: "Limit exceed, less than 1000 characters allowed"}),
     preferredCharacter: z.string().min(3, {
         message : "Choose one.",
     }),
@@ -196,7 +196,7 @@ const IssueForm = () => {
             control={form.control}
             name="private"
             render={({ field }) => (
-            <FormItem className="flex flex-row items-center justify-between">
+            <FormItem className="flex mt-2 flex-row items-center justify-between">
             <div>
                 <FormLabel>
                 Private
@@ -220,7 +220,7 @@ const IssueForm = () => {
               
                 !loading
                 ?
-                <div className='w-full  space-y-3'>
+                <div className='w-full '>
                 <Button type="submit" className="w-full bg-main">Submit</Button>
                 </div>
                 :

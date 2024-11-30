@@ -1,31 +1,46 @@
 import React from 'react';
-import PostItem from '../parts/PostItem';
 import getAllIssues from '@/lib/actions/getAllIssues';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import PostItem from '../parts/PostItem';
+
 
 const Feed = async () => {
     const issues = await getAllIssues();
-    console.log(issues.data)
+    // console.log(issues.data)
 
 
   return (
-    <section className='space-y-6 my-6'>
+    <section className='my-6'>
       {
         issues.success
         ?
 
         <>
+        <Tabs defaultValue="public">
+        <TabsList className="mb-4">
+          <TabsTrigger value="public" className="px-20">Public</TabsTrigger>
+          <TabsTrigger value="private" className="px-20">Private</TabsTrigger>
+        </TabsList>
+        <TabsContent value="public" className="space-y-6">
         {
-          issues.data.private_issues.map((item)=>{
+          issues.data.public_issues.map((item)=>{
             return(
-              <PostItem key={item.id} communityName="r/NepalSocial"
-              timeAgo={item.createdAt.substring(0,10)}
-              title={item.title}
-              content={item.description}
-              votes={1}
-              comments={31}/>
+              <PostItem key={item.id} data={item} />
             )
           })
         }
+        </TabsContent>
+        <TabsContent value="private" className="space-y-6">
+        {
+          issues.data.private_issues.map((item)=>{
+            return(
+              <PostItem key={item.id} data={item} />
+            )
+          })
+        }
+        </TabsContent>
+      </Tabs>
+       
        
         
         </>

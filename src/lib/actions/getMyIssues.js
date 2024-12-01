@@ -5,6 +5,8 @@ import { currentUser } from "@clerk/nextjs/server";
 
 const getMyIssues = async ()=>{
 
+  try {
+  
     const user = await currentUser();
 
     let details = {
@@ -25,6 +27,13 @@ const getMyIssues = async ()=>{
     const response = await query.json()
   
     return response
+
+  } catch (error) {
+    return{
+      success: false,
+      message: "Internal Server Error"+error
+    }
+  }
   }
 
   export default getMyIssues;

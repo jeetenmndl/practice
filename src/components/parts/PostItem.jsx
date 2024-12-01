@@ -58,7 +58,7 @@ export default function PostItem({data}) {
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded-full bg-blue-600" />
             <span className="text-sm font-medium">Username</span>
-            <span className="text-sm text-muted-foreground">• {timeAgo(data.createdAt)}</span>
+            <span className="text-sm text-muted-foreground">• {timeAgo(data.createdAt)} </span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -78,9 +78,9 @@ export default function PostItem({data}) {
           <div>
             {
               data.private?
-              <p className=" text-sm">21 • replies</p>
+              <p className=" text-sm">21 • replies • {data.preferredCharacter}</p>
               :
-              <p className=" text-sm">21 • comments</p>
+              <p className=" text-sm">21 • comments • {data.preferredCharacter}</p>
             }
           </div>
 

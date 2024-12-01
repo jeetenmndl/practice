@@ -1,3 +1,4 @@
+"use client"
 
 import Logo from "@/../public/logo.png"
 import Image from "next/image"
@@ -5,8 +6,19 @@ import { SignedIn, SignedOut, UserButton, UserProfile } from "@clerk/nextjs"
 import { Button } from "../ui/button"
 import Link from "next/link"
 import DashboardNavLinks from "../parts/DashboardNavlinks"
+import { usePathname } from "next/navigation"
    
   export default function NavbarDashboard() {
+
+    const pathname = usePathname();
+    const url = pathname.split("/");
+
+    const pageName = url[1]
+            .split("-")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+            .join(" "); // Join the words with a space
+    
+
     return (
         
      <nav className="relative ">
@@ -21,7 +33,7 @@ import DashboardNavLinks from "../parts/DashboardNavlinks"
 
                 <div className="flex items-center pl-8 gap-1">
                     <div className="h-5 w-5 rounded-full bg-purple-600"></div>
-                    <h3 className="font-medium text-sm">Dashboard</h3>
+                    <h3 className="font-medium text-sm">{pageName==""?"Feed":pageName}</h3>
                 </div>
 
             </div>

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowBigDown, ArrowBigUp, MessageSquare, Share2, MoreVertical, Reply } from 'lucide-react'
+import Link from "next/link"
 import { useState } from "react"
 
 export default function MyPosts({data}) {
@@ -57,7 +58,7 @@ export default function MyPosts({data}) {
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded-full bg-blue-600" />
             <span className="text-sm font-medium">Username</span>
-            <span className="text-sm text-muted-foreground">• {timeAgo(data.createdAt)}</span>
+            <span className="text-sm text-muted-foreground">• {timeAgo(data.createdAt)} • {data.preferredCharacter}</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -87,15 +88,19 @@ export default function MyPosts({data}) {
 
             {
               data.private?
-              <Button variant="secondary" size="sm" className=" group-hover:bg-white h-8 gap-2 rounded-full">
-                <Reply className="h-4 w-4" />
-                View Replies
-              </Button>
+              <Link href={"/my-private-post/"+data.id}>
+                <Button variant="secondary" size="sm" className=" group-hover:bg-white h-8 gap-2 rounded-full">
+                  <Reply className="h-4 w-4" />
+                  View Replies
+                </Button>
+              </Link>
               :
-              <Button variant="secondary" size="sm" className=" group-hover:bg-white h-8 gap-2 rounded-full">
-                <MessageSquare className="h-4 w-4" />
-                View Comments
-              </Button>
+              <Link href={"/public-post/"+data.id}>
+                <Button variant="secondary" size="sm" className=" group-hover:bg-white h-8 gap-2 rounded-full">
+                  <MessageSquare className="h-4 w-4" />
+                  View Comments
+                </Button>
+              </Link>
             }
           
 

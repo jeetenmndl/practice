@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import WriteComment from '@/components/parts/WriteComment'
 import PostItem from '@/components/parts/PostItem'
 import { Comment } from '@/components/parts/Comment'
+import getSpecificIssue from '@/lib/actions/getSpecificIssue'
 
 const SAMPLE_POST = {
   id: '1',
@@ -46,10 +47,12 @@ const SAMPLE_POST = {
 }
 
 
-// get by params.id 
 
+export default async function Page({params}) {
 
-export default function Page({params}) {
+  const {id} = await params;
+  const response = await getSpecificIssue(id);
+
   return (
     <div className="max-w-2xl mx-auto p-4">
       <div className="mb-4">
@@ -60,14 +63,14 @@ export default function Page({params}) {
       </div>
 
 
-      <PostItem data={{title:SAMPLE_POST.title,createdAt: new Date(), description: SAMPLE_POST.content}} />
+      <PostItem data={response.issue[0]} />
 
 
       <Card className="mt-4 p-4">
-       <WriteComment />
+       <WriteComment id={id} />
 
         <div className="space-y-4">
-          {SAMPLE_POST.comments.map((comment) => (
+          {response.issue[0].comments.map((comment) => (
             <Comment key={comment.id} comment={comment} />
           ))}
         </div>

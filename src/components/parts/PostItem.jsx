@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowBigDown, ArrowBigUp, MessageSquare, Share2, MoreVertical, Reply } from 'lucide-react'
+import Link from "next/link"
 import { useState } from "react"
 
 export default function PostItem({data}) {
@@ -92,10 +93,12 @@ export default function PostItem({data}) {
                 Reply
               </Button>
               :
+              <Link href={"/public-post/"+data.id} >
               <Button variant="secondary" size="sm" className=" group-hover:bg-white h-8 gap-2 rounded-full">
                 <MessageSquare className="h-4 w-4" />
                 Comment
               </Button>
+              </Link>
             }
           
 

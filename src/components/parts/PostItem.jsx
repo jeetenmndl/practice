@@ -88,16 +88,18 @@ export default function PostItem({data}) {
 
             {
               data.private?
-              <Button variant="secondary" size="sm" className=" group-hover:bg-white h-8 gap-2 rounded-full">
-                <Reply className="h-4 w-4" />
-                Reply
-              </Button>
+              <Link href={"/issue-reply/"+data.id} >
+                <Button variant="secondary" size="sm" className=" group-hover:bg-white h-8 gap-2 rounded-full">
+                  <Reply className="h-4 w-4" />
+                  Reply
+                </Button>
+              </Link>
               :
               <Link href={"/public-post/"+data.id} >
-              <Button variant="secondary" size="sm" className=" group-hover:bg-white h-8 gap-2 rounded-full">
-                <MessageSquare className="h-4 w-4" />
-                Comment
-              </Button>
+                <Button variant="secondary" size="sm" className=" group-hover:bg-white h-8 gap-2 rounded-full">
+                  <MessageSquare className="h-4 w-4" />
+                  Comment
+                </Button>
               </Link>
             }
           

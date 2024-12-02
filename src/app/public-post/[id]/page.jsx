@@ -52,6 +52,7 @@ export default async function Page({params}) {
 
   const {id} = await params;
   const response = await getSpecificIssue(id);
+  console.log(response.issue[0].comments)
 
   return (
     <div className="max-w-2xl mx-auto p-4">
@@ -70,8 +71,8 @@ export default async function Page({params}) {
        <WriteComment id={id} />
 
         <div className="space-y-4">
-          {response.issue[0].comments.map((comment) => (
-            <Comment key={comment.id} comment={comment} />
+          {response.issue[0].comments.map((comment,index) => (
+            <Comment key={index} comment={comment} />
           ))}
         </div>
       </Card>

@@ -9,8 +9,6 @@ import { useToast } from '@/hooks/use-toast'
 
 const WriteComment = (props) => {
 
-  console.log(props.id)
-
     const [comment, setComment] = useState("")
     const [loading, setLoading] = useState(false);
     const {toast} = useToast();

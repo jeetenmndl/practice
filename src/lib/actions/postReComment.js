@@ -5,7 +5,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 
-const postComment = async (id, message)=>{
+const postReComment = async (id, message)=>{
 
     const user = await currentUser();
 
@@ -13,14 +13,12 @@ const postComment = async (id, message)=>{
     try {
 
     let details = {
-        issueID: id,
-        commentedBy: user.id,
+        commentID: id,
+        reCommentedBy: user.id,
         message: message,
         agree: 0,
         disagree: 0
     }
-
-    console.log(details)
 
   
     const settings = {
@@ -31,7 +29,7 @@ const postComment = async (id, message)=>{
       body: JSON.stringify(details)
   };
   
-    const query = await fetch(`${process.env.SERVER}/postComment`, settings)
+    const query = await fetch(`${process.env.SERVER}/postReComment`, settings)
     const response = await query.json();
 
     revalidatePath(`/public-post/${id}`);
@@ -46,4 +44,4 @@ const postComment = async (id, message)=>{
 }
   }
 
-  export default postComment;
+  export default postReComment;

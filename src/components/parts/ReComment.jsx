@@ -7,9 +7,8 @@ import { ArrowBigDown, ArrowBigUp, Award, MessageSquare, MoreHorizontal, Share2 
 import timeAgo from '@/lib/actions/timeAgo'
 import postReComment from '@/lib/actions/postReComment'
 import { useToast } from '@/hooks/use-toast'
-import { ReComment } from './ReComment'
 
-export function Comment({comment}) {
+export function ReComment({comment}) {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [voteCount, setVoteCount] = useState(0)
   const [isUpvoted, setIsUpvoted] = useState(false)
@@ -57,7 +56,7 @@ export function Comment({comment}) {
   const submitReply = async () => {
     try {
       
-      const response = await postReComment(comment.id, replyContent);
+      const response = await postReComment(comment.commentID, replyContent);
       console.log(response)
 
       if(response.success){
@@ -156,13 +155,6 @@ export function Comment({comment}) {
             )}
           </div>
         </div>
-        {!isCollapsed && comment.re_comments && comment.re_comments.length > 0 && (
-          <div className="mt-4 pl-8 space-y-4">
-            {comment.re_comments.map((reComment) => (
-              <ReComment key={Math.floor(Math.random() * 900)} comment={reComment} />
-            ))}
-          </div>
-        )}
       </div>
     </div>
   )

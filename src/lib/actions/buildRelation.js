@@ -1,0 +1,49 @@
+"use server"
+
+import { currentUser } from "@clerk/nextjs/server";
+import { StreamChat } from "stream-chat";
+
+
+
+const buildRelation = async (suggestion, issueToken, suggestionToken, channelData)=>{
+
+    const user = await currentUser();
+
+
+    try {     
+
+    let details = {
+        relationName: suggestion.repliedBy,
+        issueUser: user.id,
+        suggestionUser: suggestion.repliedBy,
+        issueToken: issueToken,
+        suggestionToken: suggestionToken,
+        // channel: JSON.stringify(newChannel),
+        channel: channelData
+    }
+
+    console.log(details)
+
+  
+    const settings = {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(details)
+  };
+  
+    const query = await fetch(`${process.env.SERVER}/buildRelation`, settings)
+    const response = await query.json();
+  
+    return response
+
+} catch (error) {
+        return {
+            success: false,
+            message: "INTERNAL SERVER ERROR"+error
+        }; 
+}
+  }
+
+  export default buildRelation;

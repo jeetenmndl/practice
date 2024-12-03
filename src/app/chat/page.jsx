@@ -4,7 +4,7 @@ import React from 'react'
 const page = () => {
   return (
     <div>
-        <ChatComponent userID="11111" />
+        <ChatComponent userID="12345" />
     </div>
   )
 }

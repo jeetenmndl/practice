@@ -10,7 +10,7 @@ import "@stream-io/stream-chat-css/dist/v2/css/index.layout.css";
 
 
 
-const ChatComponent = ({ userID }) => {
+const ChatListComponent = ({ userID }) => {
   const [client, setClient] = useState(null);
   const [channel, setChannel] = useState(null);
 
@@ -79,4 +79,4 @@ const ChatComponent = ({ userID }) => {
   );
 };
 
-export default ChatComponent;
+export default ChatListComponent;

@@ -5,26 +5,17 @@ import { Button } from "@/components/ui/button"
 import getMyIssues from "@/lib/actions/getMyIssues"
 import getSpecificIssue from "@/lib/actions/getSpecificIssue"
 import timeAgo from "@/lib/actions/timeAgo"
-
-
-
-const SAMPLE_POST = {
-  id: '1',
-  communityName: 'r/legal',
-  author: 'Sure_Back_2542',
-  timeAgo: '11 hr. ago',
-  title: 'Can I force my mom to financially support me?',
-  content: "Long story short, my mom (f32) kicked me (f16) out around 7 months ago. I've been staying with my grandparents and since she's been stopping by once every 2 months. I ask her for money for food, clothes, and other every day expenses and she helps with nothing. My grandparents have been complaining about the rise in utility costs as well. My grandparents are not my legal guardians and we leave in the state on Pennsylvania. Is there anything I can do to legally force her to support me financially?",
-  votes: 12,
-  commentCount: 35,
-  comments: []
-}
+import RelateButton from "@/components/parts/RelateButton"
+import { currentUser } from "@clerk/nextjs/server"
 
 
 export default async function Page({params}) {
 
   const {id} = await params;
   const response = await getSpecificIssue(id);
+
+  const user = await currentUser();
+  const userID = user.id;
 
   return (
     <div className="max-w-2xl mx-auto p-4">
@@ -50,7 +41,9 @@ export default async function Page({params}) {
               • 
               <p className="text-sm text-muted-foreground">{timeAgo(suggestion.date)}</p>
             </div>
-            <Button className="bg-main hover:bg-purple-600" size="sm">Relate</Button>
+            
+            <RelateButton userID={userID} suggestion={suggestion} />
+
           </div>
           <p className="mt-2 text-sm">{suggestion.message}</p>
         </Card>

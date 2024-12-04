@@ -26,13 +26,16 @@ const Page = async () => {
         <TabsContent value="public">
           <div className="grid grid-cols-2 gap-3">
             {
-              issues.data.public_issues.map((item)=>{
+              issues.data.public_issues.length == 0?
+              <div className='text-gray-600 font-semibold text-lg mt-12'>
+                No Public Issues
+              </div>
+              :
+              issues.data.public_issues.map((item,index)=>{
                 return(
-                  <>
-                  <MyPosts key={item.id} data={item} />
-                  <MyPosts key={item.id+1} data={item} />
-                  <MyPosts key={item.id+2} data={item} />
-                  </>
+                  <div  key={item.id}>
+                    <MyPosts data={item} />
+                  </div>
                 )
               })
             }
@@ -42,9 +45,11 @@ const Page = async () => {
         <TabsContent value="private">
         <div className="grid grid-cols-2 gap-2">
         {
-          issues.data.private_issues.map((item)=>{
+          issues.data.private_issues.map((item,index)=>{
             return(
-              <MyPosts key={item.id} data={item} />
+              <div  key={item.id}>
+                <MyPosts data={item} />
+              </div>
             )
           })
         }

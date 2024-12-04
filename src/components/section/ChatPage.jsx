@@ -55,7 +55,7 @@ export default function ChatPage({userID, channelID}) {
   if (!channel) return <div>Loading...</div>;
 
   return (
-        <div className=" h-[600px] pt-2 border-l">
+        <div className=" h-[600px] pt-2 ">
     <Chat client={streamClient}>
       <StreamChannel channel={channel}>
         <Window>

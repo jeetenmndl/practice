@@ -13,7 +13,7 @@ export default function ProfileInfo({data, image}) {
           <Image src={image} alt={data.name+" Sambandha"} className="w-20 h-20 rounded-full" />
             
           <div className="flex-1">
-            <CardTitle className="text-2xl">{data.firstName + " " + data.LastName}</CardTitle>
+            <CardTitle className="text-2xl">{data.firstName + " " + data.lastName}</CardTitle>
             <CardDescription>User Information</CardDescription>
           </div>
           <Badge className={data.isVerified ? "bg-green-600 ml-auto" : "bg-orange-600 ml-auto"}>

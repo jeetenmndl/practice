@@ -13,18 +13,18 @@ const page = async ({params}) => {
     const userID = user.id;
 
   return (
-    <main className='px-28 flex '>
+    <main className='px-4 flex '>
 
-    <section className='w-1/4'>
+    <section className='w-1/6'>
       <RelationChats data={relations.data} active={id} />
     </section>
 
-    <section className='w-2/4'>
+    <section className='w-4/6 border-x'>
       <ChatPage userID={userID} channelID={id} />
 
     </section>
 
-    <section className='w-1/4'>
+    <section className='w-1/6'>
         
     </section>
 

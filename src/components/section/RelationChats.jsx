@@ -16,7 +16,7 @@ const RelationChats = async ({active, data}) => {
           return(
             <React.Fragment key={item.channel.id || index}>
             <Link href={`/relations/${item.channel.id}`} className='pr-2' >
-            <div className={item.channel.id==active?"bg-purple-600 text-white rounded-lg w-full  py-2 px-4 flex gap-6 items-center":"hover:bg-gray-100 rounded-lg w-full  py-2 px-4 flex gap-6 items-center"}>
+            <div className={item.channel.id==active?"bg-purple-600 text-white rounded-lg w-full  py-2 px-4 flex gap-4 items-center":"hover:bg-gray-100 rounded-lg w-full  py-2 px-4 flex gap-4 items-center"}>
 
             <div className="rounded-full w-8 h-8 bg-blue-600 grid place-content-center">
               <p className="text-lg font-medium text-white">

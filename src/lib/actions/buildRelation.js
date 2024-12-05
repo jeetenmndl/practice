@@ -5,7 +5,7 @@ import { StreamChat } from "stream-chat";
 
 
 
-const buildRelation = async (suggestion, issueToken, suggestionToken, channelData)=>{
+const buildRelation = async (issuerName, suggestion, issueToken, suggestionToken, channelData)=>{
 
     const user = await currentUser();
 
@@ -13,7 +13,7 @@ const buildRelation = async (suggestion, issueToken, suggestionToken, channelDat
     try {     
 
     let details = {
-        relationName: suggestion.repliedBy,
+        relationName: suggestion.userName + " " + issuerName,
         issueUser: user.id,
         suggestionUser: suggestion.repliedBy,
         issueToken: issueToken,

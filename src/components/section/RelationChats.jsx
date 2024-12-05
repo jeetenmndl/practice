@@ -14,7 +14,7 @@ const RelationChats = async ({active, data}) => {
       {
         data.map((item, index)=>{
           return(
-            <React.Fragment key={item.channel.id || index}>
+            <React.Fragment key={item.channel.id + index}>
             <Link href={`/relations/${item.channel.id}`} className='pr-2' >
             <div className={item.channel.id==active?"bg-purple-600 text-white rounded-lg w-full  py-2 px-4 flex gap-4 items-center":"hover:bg-gray-100 rounded-lg w-full  py-2 px-4 flex gap-4 items-center"}>
 

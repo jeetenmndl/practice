@@ -27,7 +27,7 @@ const DashboardNavLinks = () => {
             {
                 navLinks.map((link)=>{
 
-                    const isActive = pathname == link.href;
+                    const isActive = url[1] == link.href.substring(1);
 
                     return(
                         <Link href={link.href} key={link.href} className={isActive?"border-b-2 border-main py-2":"py-2"}>

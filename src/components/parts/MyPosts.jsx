@@ -57,7 +57,7 @@ export default function MyPosts({data}) {
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded-full bg-blue-600" />
-            <span className="text-sm font-medium">Username</span>
+            <span className="text-sm font-medium">{data.userName}</span>
             <span className="text-sm text-muted-foreground">• {timeAgo(data.createdAt)} • {data.preferredCharacter}</span>
           </div>
 

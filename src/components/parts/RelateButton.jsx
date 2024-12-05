@@ -9,7 +9,9 @@ import { useRouter } from "next/navigation";
 import { connectUser, disconnectUser, streamToken } from "@/lib/actions/stream";
 import { StreamChat } from "stream-chat";
 
-const RelateButton = ({userID, suggestion}) => {
+const RelateButton = ({issuerName, userID, suggestion}) => {
+
+  console.log(suggestion.userName, issuerName)
 
     const [loading, setLoading] = useState(false);
     const {toast} = useToast();
@@ -23,18 +25,19 @@ const RelateButton = ({userID, suggestion}) => {
 
         const streamClient = StreamChat.getInstance(process.env.NEXT_PUBLIC_STREAM_API_KEY);
 
-        // Connect both users to Stream
+        // Connect suggester to steram
         const token1 = await streamToken(suggestion.repliedBy);
 
-        await streamClient.connectUser({ id: suggestion.repliedBy, name: `User ${suggestion.repliedBy}` }, token1);
+        await streamClient.connectUser({ id: suggestion.repliedBy, name: suggestion.userName }, token1);
 
         await streamClient.disconnectUser();
 
+        // Connect issuer to steram
         const token2 = await streamToken(userID);
 
-        await streamClient.connectUser({ id: userID, name: `User ${userID}` }, token2);
+        await streamClient.connectUser({ id: userID, name: issuerName }, token2);
 
-        await connectUser(userID, `User ${userID}`);
+        await connectUser(userID, issuerName);
   
         // Create a new channel
 
@@ -48,7 +51,7 @@ const RelateButton = ({userID, suggestion}) => {
           createdAt: channelInfo.channel.created_at
         }
         
-        const response = await buildRelation(suggestion, token2, token1, channelData );
+        const response = await buildRelation(issuerName, suggestion, token2, token1, channelData );
 
         if(response.success){
           router.push('/relations');

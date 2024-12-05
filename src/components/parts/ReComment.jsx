@@ -102,7 +102,7 @@ export function ReComment({comment}) {
           <div className="w-6 h-6 rounded-full bg-gray-200" />
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <span className="font-medium text-sm">username</span>
+              <span className="font-medium text-sm">{comment.userName}</span>
               <span className="text-sm text-muted-foreground">• {timeAgo(comment.date)}</span>
             </div>
             {!isCollapsed && (

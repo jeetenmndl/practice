@@ -1,12 +1,13 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { User, Mail, Phone, MapPin, CreditCard, CheckCircle2, ImageDown } from "lucide-react"
+import { User, Mail, Phone, MapPin, CreditCard, CheckCircle2, ImageDown, UserPen } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
 
 export default function ProfileInfo({data, image}) {
+  // console.log(data)
   return (
       <Card className="w-2/3 mx-auto">
         <CardHeader className="flex flex-row items-center gap-4">
@@ -30,7 +31,11 @@ export default function ProfileInfo({data, image}) {
             <InfoItem icon={<User className="w-4 h-4" />} label="Character" value={data.character} />
           </div>
           <Separator />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <InfoItem icon={<MapPin className="w-4 h-4" />} label="Address" value={data.address} />
+            <InfoItem icon={<UserPen className="w-4 h-4" />} label="Username" value={data.userName} />
+          </div>
+          
           <Separator />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InfoItem icon={<CreditCard className="w-4 h-4" />} label="Age" value={data.age} />

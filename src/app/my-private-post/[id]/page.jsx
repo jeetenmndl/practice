@@ -13,6 +13,9 @@ export default async function Page({params}) {
 
   const {id} = await params;
   const response = await getSpecificIssue(id);
+  // console.log(response)
+
+  const issuerName = response.issue[0].userName;
 
   const user = await currentUser();
   const userID = user.id;
@@ -37,12 +40,12 @@ export default async function Page({params}) {
           <Card key={suggestion.id} className="p-4 hover:bg-green-50">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-2">
-              <h3 className="font-medium text-sm">username</h3>
+              <h3 className="font-medium text-sm">{suggestion.userName}</h3>
               • 
               <p className="text-sm text-muted-foreground">{timeAgo(suggestion.date)}</p>
             </div>
             
-            <RelateButton userID={userID} suggestion={suggestion} />
+            <RelateButton issuerName={issuerName} userID={userID} suggestion={suggestion} />
 
           </div>
           <p className="mt-2 text-sm">{suggestion.message}</p>

@@ -159,7 +159,9 @@ export function Comment({comment}) {
         {!isCollapsed && comment.re_comments && comment.re_comments.length > 0 && (
           <div className="mt-4 pl-8 space-y-4">
             {comment.re_comments.map((reComment) => (
-              <ReComment key={Math.floor(Math.random() * 900)} comment={reComment} />
+              // <ReComment key={Math.floor(Math.random() * 900)} comment={reComment} />
+              <ReComment key={reComment.id} comment={reComment} />
+
             ))}
           </div>
         )}

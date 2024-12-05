@@ -56,7 +56,7 @@ export default function PostItem({data}) {
         {/* Header */}
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-blue-600" />
+            <div className={data.private?"w-6 h-6 rounded-full bg-green-600":"w-6 h-6 rounded-full bg-blue-600"} />
             <span className="text-sm font-medium">{data.userName}</span>
             <span className="text-sm text-muted-foreground">• {timeAgo(data.createdAt)} </span>
           </div>
@@ -78,9 +78,9 @@ export default function PostItem({data}) {
           <div>
             {
               data.private?
-              <p className=" text-sm">21 • replies • {data.preferredCharacter}</p>
+              <p className=" text-sm">{data.reply_count} • replies • {data.preferredCharacter}</p>
               :
-              <p className=" text-sm">21 • comments • {data.preferredCharacter}</p>
+              <p className=" text-sm">{data.comments_count} • comments • {data.preferredCharacter}</p>
             }
           </div>
 

@@ -5,7 +5,7 @@ import { Calendar } from '@/components/ui/calendar'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import Image from 'next/image'
 
 export default function BookingForm() {
@@ -28,7 +28,7 @@ export default function BookingForm() {
       id: 2,
       name: "Dr. Emily Brown",
       specialization: "Counsellor",
-      image: "https://media.istockphoto.com/id/1425798958/photo/photo-of-confident-female-doctor-in-hospital-looking-at-camera-with-smile.jpg?s=612x612&w=0&k=20&c=i91idG544pXuYkw5ju6iIzm1m-lEqQaygeOOrjG5GEk=",
+      image: "https://media.istockphoto.com/id/497142181/photo/physician.jpg?s=612x612&w=0&k=20&c=PX_lRXXQo7lUpE1Slj2vHsiCnZZnVNF_OX99-ag6O_8=",
       fees: 1500,
       info: "I am a counselor, here to provide support and guidance as you navigate personal or emotional challenges. My role is to create a safe and understanding space where you can express yourself and find effective ways to cope."
     },
@@ -51,9 +51,9 @@ export default function BookingForm() {
 
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="w-2/3 mt-8 flex mx-auto justify-center gap-4">
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-4 '>
+      <Card className="p-4">
         <div>
         <Calendar
           mode="single"
@@ -63,9 +63,9 @@ export default function BookingForm() {
         />
         </div>
 
-        <div>
+        {/* <div> */}
         <Select onValueChange={(value) => setSelectedTime(value)}>
-          <SelectTrigger className="w-full">
+          <SelectTrigger className="w-full mt-4">
             <SelectValue placeholder="Select time" />
           </SelectTrigger>
           <SelectContent>
@@ -76,7 +76,7 @@ export default function BookingForm() {
         </Select>
 
         <Select onValueChange={(value) => setSelectedDoctor(Number(value))}>
-          <SelectTrigger className="w-full mt-6">
+          <SelectTrigger className="w-full mt-4">
             <SelectValue placeholder="Select doctor" />
           </SelectTrigger>
           <SelectContent>
@@ -86,24 +86,17 @@ export default function BookingForm() {
           </SelectContent>
         </Select>
 
- <div className="md:col-span-2 mt-6">
-        <h2 className="text-xl font-semibold mb-2">Available Bookings</h2>
-        <ul className="space-y-2">
-          {/* Mock available bookings */}
-          <li>09:00 - 10:00</li>
-          <li>11:00 - 12:00</li>
-          <li>14:00 - 15:00</li>
-        </ul>
-            <Button className="mt-4 w-full">Join Booking</Button>
-      </div>
-        </div>
-      </div>
+            <Button onClick={handleBooking} className="mt-4 w-full bg-main hover:bg-purple-600">Confirm Booking</Button>
+
+        {/* </div> */}
+      </Card>
 
 {/* doctor info  */}
-      <div className='pl-60'>
-        {selectedDoctor && (
+      <div className=''>
+        {selectedDoctor? (
           <Card>
-            <CardContent className="pt-6">
+            <CardContent className="grid grid-cols-2 gap-4 pt-6">
+              <div>
               <Image
                 src={doctors[selectedDoctor - 1].image}
                 alt={doctors[selectedDoctor - 1].name}
@@ -111,13 +104,41 @@ export default function BookingForm() {
                 height={100}
                 className="rounded-lg w-full shadow-md"
               />
+              </div>
+
+              <div>
               <h2 className='text-lg font-semibold mt-4'>{doctors[selectedDoctor - 1].name}</h2>
               <p><strong>Specialization:</strong> {doctors[selectedDoctor - 1].specialization}</p>
               <p><strong>Fees:</strong> ${doctors[selectedDoctor - 1].fees}</p>
               <p className='mt-4'><strong>Info:</strong> {doctors[selectedDoctor - 1].info}</p>
+              </div>
             </CardContent>
           </Card>
-        )}
+        )
+      :
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            Your Bookings
+          </CardTitle>
+          <CardDescription>
+            See the bookings that you made earlier.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className='border rounded-md p-4 shadow'>
+            <p className='text-md'>Dr. Alan Turing</p>
+            <p className='text-sm text-gray-500 mb-4 '>2024-12-23 . 11:23 </p>
+            <Button size="sm" className="w-full">Join Session</Button>
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button variant="ghost" className="border border-red-500 text-red-500" >Emergency Booking</Button>
+        </CardFooter>
+      </Card>
+      
+      
+      }
       </div>
      
     </div>

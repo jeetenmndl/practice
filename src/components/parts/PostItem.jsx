@@ -8,6 +8,8 @@ import { useState } from "react"
 
 export default function PostItem({data}) {
 
+  console.log(data)
+
   function timeAgo(inputDateTime) {
     const now = new Date();
     const inputDate = new Date(inputDateTime);

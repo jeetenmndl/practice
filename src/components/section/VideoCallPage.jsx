@@ -5,8 +5,11 @@ import { StreamVideo, StreamVideoClient, StreamCall, SpeakerLayout, CallControls
 
 import '@stream-io/video-react-sdk/dist/css/styles.css'
 import Layout from './Layout'
+import { useRouter } from 'next/navigation'
+import { Button } from '../ui/button'
 
 export default function VideoCallPage({userID, token, callID}) {
+
   // const [client, setClient] = useState(null)
   const clientRef = useRef(null);
   const [call, setCall] = useState(null)
@@ -67,17 +70,17 @@ export default function VideoCallPage({userID, token, callID}) {
   }
 
   return (
-    <Layout title="Video Call">
-      <div className="h-[600px]">
+      <div className="h-[600px] mt-6">
         <StreamVideo client={clientRef.current}>
           <CallUI call={call} />
         </StreamVideo>
       </div>
-    </Layout>
   )
 }
 
 function CallUI({ call }) {
+  const router = useRouter()
+
   useEffect(() => {
     call.join({ create: true })
     return () => {
@@ -91,6 +94,9 @@ function CallUI({ call }) {
         <StreamTheme>
           <SpeakerLayout />
           <CallControls />
+          <div className='fixed right-1/3 z-50 -translate-x-2 bottom-4'>
+            <Button onClick={()=>{router.push("/")}} className="rounded-full px-6 bg-red-600 hover:bg-red-500">End Call</Button>
+          </div>
         </StreamTheme>
       </StreamCall>
     </div>

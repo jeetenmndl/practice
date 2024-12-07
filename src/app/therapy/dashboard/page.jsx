@@ -1,25 +1,59 @@
 
 import Layout from '@/components/section/Layout'
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import getDoctorBookings from '@/lib/actions/getDoctorBookings'
 import { currentUser } from '@clerk/nextjs/server'
 import Link from 'next/link'
 
-export default async function PsychiatristPage() {
-    const user = await currentUser();
-    console.log(user.id)
+export default async function Dashboard() {
+    
+  const response = await getDoctorBookings("1");
 
   return (
-    <Layout title="Psychiatrist Dashboard">
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-        <div className="px-4 py-5 sm:p-6">
-          <h2 className="text-lg leading-6 font-medium text-gray-900">Welcome, Doctor!</h2>
-          <div className="mt-5">
-            <Link href="/therapy/session" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Join Video Call
-            </Link>
-          </div>
-        </div>
-      </div>
-      </Layout>
+    <div className="px-28 py-4">
+      <h2 className='text-xl mt-8 font-semibold'>Dashboard</h2>
+
+      <section className='mt-6 grid grid-cols-3 gap-6'>
+
+        {
+          response.Bookinginfo.length==0?
+          <p className='text-lg font-medium py-10 text-gray-600'>You have no bookings</p>
+          :
+          response.Bookinginfo.map((item)=>{
+            return(
+            <Card key={item.id}>
+              <CardHeader>
+                <CardTitle>
+                    {item.userInfo.firstName} {item.userInfo.lastName}
+                </CardTitle>
+                <CardDescription>
+                  {item.bookingDate.substring(0,10)} • {item.bookingTime.substring(0,5)}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="grid grid-cols-2 gap-4">
+                <p className=''>Age: {item.userInfo.age}</p>
+                <p className=''>Character: {item.userInfo.character}</p>
+
+              </CardContent>
+              <CardFooter>
+                <Link className="w-full" href={"/therapy/session/"+item.uuID}>
+                <Button className="w-full bg-main hover:bg-purple-600">
+                  Join Session
+                </Button>
+                </Link>
+              </CardFooter>
+            </Card>
+            )
+          })
+        }
+
+      </section>
+
+
+
+
+    </div>
   )
 }
 

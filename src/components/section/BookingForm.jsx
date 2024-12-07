@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import Image from 'next/image'
 import postBooking from '@/lib/actions/postBooking'
 import { useToast } from '@/hooks/use-toast'
+import Link from 'next/link'
 
 export default function BookingForm({bookings}) {
 
@@ -59,7 +60,7 @@ export default function BookingForm({bookings}) {
     else{
       
     const data = {
-      bookingDate: selectedDate,
+      bookingDate: selectedDate.toISOString(),
       bookingTime: selectedTime,
       doctorID: selectedDoctor.toString()
     }
@@ -173,7 +174,9 @@ console.log(response)
                 <p className='text-sm text-gray-500 mb-4 '>{item.bookingDate} • {item.bookingTime} </p>
                 <p className='text-sm text-gray-500 mb-4 '>{doctors[parseInt(item.doctorID) - 1].specialization} </p>
 
-                <Button size="sm" className="w-full">Join Session</Button>
+                <Link href={"/therapy/session/"+item.uuID} >
+                  <Button size="sm" className="w-full">Join Session</Button>
+                </Link>  
               </div>
 
               )
@@ -182,7 +185,9 @@ console.log(response)
 
         </CardContent>
         <CardFooter>
+        <Link href={"/therapy/session/emergency"} >
           <Button variant="ghost" className="border border-red-500 text-red-500" >Emergency Booking</Button>
+        </Link>
         </CardFooter>
       </Card>
       

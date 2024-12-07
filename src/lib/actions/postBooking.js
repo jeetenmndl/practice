@@ -19,7 +19,7 @@ const postBooking = async (data)=>{
         doctorID: data.doctorID, 
         payment: false,
         status: "pending",
-        uuid: myuuid
+        uuID: myuuid
     }
 
     console.log(details)

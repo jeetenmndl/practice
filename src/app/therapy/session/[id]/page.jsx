@@ -3,18 +3,18 @@ import getCallID from '@/lib/actions/getCallID';
 import { streamToken } from '@/lib/actions/stream';
 import { currentUser } from '@clerk/nextjs/server'
 
-const page = async () => {
+const page = async ({params}) => {
     const user = await currentUser();
     const userID = user.id;
 
     const token = await streamToken(userID);
-    const callID = await getCallID();
+    const {id} = await params;
 
     // console.log(userID, token, callID)
 
   return (
     <>
-    <VideoCallPage userID={userID} token={token} callID={callID} />
+    <VideoCallPage userID={userID} token={token} callID={id} />
     <div>hi</div>
     </>
   )

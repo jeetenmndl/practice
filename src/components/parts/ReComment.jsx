@@ -9,6 +9,9 @@ import postReComment from '@/lib/actions/postReComment'
 import { useToast } from '@/hooks/use-toast'
 
 export function ReComment({comment}) {
+
+  // console.log(comment)
+
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [voteCount, setVoteCount] = useState(0)
   const [isUpvoted, setIsUpvoted] = useState(false)

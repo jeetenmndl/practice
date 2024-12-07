@@ -10,6 +10,7 @@ import { useToast } from '@/hooks/use-toast'
 import { ReComment } from './ReComment'
 
 export function Comment({comment}) {
+  
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [voteCount, setVoteCount] = useState(0)
   const [isUpvoted, setIsUpvoted] = useState(false)
@@ -58,7 +59,7 @@ export function Comment({comment}) {
     try {
       
       const response = await postReComment(comment.id, replyContent);
-      console.log(response)
+      // console.log(response)
 
       if(response.success){
         toast({

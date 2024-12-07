@@ -7,8 +7,13 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import Image from 'next/image'
+import postBooking from '@/lib/actions/postBooking'
+import { useToast } from '@/hooks/use-toast'
 
-export default function BookingForm() {
+export default function BookingForm({bookings}) {
+
+  const {toast} = useToast();
+
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [selectedTime, setSelectedTime] = useState('')
   const [selectedDoctor, setSelectedDoctor] = useState(null)
@@ -43,9 +48,38 @@ export default function BookingForm() {
   ];
   
 
-  const handleBooking = () => {
-    // Handle booking logic here
-    console.log('Booking confirmed')
+  const handleBooking = async () => {
+    if(selectedTime == '' || selectedDoctor == null){
+      toast({
+        title: "OOPS!",
+        description: "Please select time and doctor.",
+        variant: "destructive"
+      })
+    }
+    else{
+      
+    const data = {
+      bookingDate: selectedDate,
+      bookingTime: selectedTime,
+      doctorID: selectedDoctor.toString()
+    }
+    const response = await postBooking(data);
+console.log(response)
+
+    if(response.success){
+      toast({
+        title: "Congratulations!",
+        description: "Session booked.",
+      })
+    }
+    else{
+      toast({
+        title: "OOPS!",
+        description: response.message,
+        variant: "destructive"
+      })
+    }
+  }
   }
 
 
@@ -125,12 +159,27 @@ export default function BookingForm() {
             See the bookings that you made earlier.
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className='border rounded-md p-4 shadow'>
-            <p className='text-md'>Dr. Alan Turing</p>
-            <p className='text-sm text-gray-500 mb-4 '>2024-12-23 . 11:23 </p>
-            <Button size="sm" className="w-full">Join Session</Button>
-          </div>
+        <CardContent className="flec flex-col gap-4">
+
+        {
+          bookings.length==0?
+          <p>
+            No bookings.
+          </p>:
+          bookings.map((item)=>{
+            return(
+              <div key={item.id} className='border rounded-md p-4 shadow'>
+                <p className='text-md'>{doctors[parseInt(item.doctorID) - 1].name}</p>
+                <p className='text-sm text-gray-500 mb-4 '>{item.bookingDate} • {item.bookingTime} </p>
+                <p className='text-sm text-gray-500 mb-4 '>{doctors[parseInt(item.doctorID) - 1].specialization} </p>
+
+                <Button size="sm" className="w-full">Join Session</Button>
+              </div>
+
+              )
+            })
+        }
+
         </CardContent>
         <CardFooter>
           <Button variant="ghost" className="border border-red-500 text-red-500" >Emergency Booking</Button>

@@ -19,16 +19,16 @@ const postUser = async (data,docPhoto, userPhoto)=>{
 
     try {
         // cloudinary upload for selfie 
-        const userResult = await fetch(`${process.env.DOMAIN}/api/cloudinary`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({base64: userPhoto})
+        // const userResult = await fetch(`${process.env.DOMAIN}/api/cloudinary`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({base64: userPhoto})
           
-          })
+        //   })
             
-          const {url} = await userResult.json();
+        //   const {url} = await userResult.json();
 
 
 
@@ -65,7 +65,7 @@ const postUser = async (data,docPhoto, userPhoto)=>{
         email: user.emailAddresses[0].emailAddress,
         verified: false,
         docPhoto: docUrl,
-        userPhoto: url || "https://images.pexels.com/photos/1416736/pexels-photo-1416736.jpeg?cs=srgb&dl=pexels-jonas-mohamadi-1416736.jpg&fm=jpg",
+        userPhoto:  "https://images.pexels.com/photos/1416736/pexels-photo-1416736.jpeg?cs=srgb&dl=pexels-jonas-mohamadi-1416736.jpg&fm=jpg",
         character: data.character,
         age: data.age,
         address: data.address,

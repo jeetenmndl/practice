@@ -76,8 +76,6 @@ const ProfileForm = () => {
 
     // 2. Define a submit handler.
     async function onSubmit(values) {
-
-      console.log(values, documentImage, selfieImage)
         
       const response = await postUser(values, documentImage, selfieImage);
 

@@ -19,7 +19,7 @@ const postUser = async (data,docPhoto, userPhoto)=>{
 
     try {
         // cloudinary upload for selfie 
-        const selfieUpload = await cloudinary.uploader.upload(file, {
+        const selfieUpload = await cloudinary.uploader.upload(userPhoto, {
           folder: "sambandha", 
         }, (error, result) => {
           if (error) {

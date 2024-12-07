@@ -12,7 +12,13 @@ export default async function Dashboard() {
 
   return (
     <div className="px-28 py-4">
-      <h2 className='text-xl mt-8 font-semibold'>Dashboard</h2>
+      <div className="flex items-center justify-between">
+        <h2 className='text-xl mt-8 font-semibold'>Dashboard</h2>
+        <Link href={"/therapy/session/emergency"} >
+          <Button variant="ghost" className="border border-red-500 text-red-500" >Emergency Booking</Button>
+        </Link>
+
+      </div>
 
       <section className='mt-6 grid grid-cols-3 gap-6'>
 

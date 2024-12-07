@@ -93,6 +93,7 @@ const postUser = async (data,docPhoto, userPhoto)=>{
 } catch (error) {
         return {
             success: false,
+            message: "Internal server error"+error
         }; 
 }
   }

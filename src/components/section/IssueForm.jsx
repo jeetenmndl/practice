@@ -178,8 +178,8 @@ const IssueForm = () => {
                   <SelectItem value="mother">Mother</SelectItem>
                   <SelectItem value="son">Son</SelectItem>
                   <SelectItem value="daughter">Daughter</SelectItem>
-                  <SelectItem value="grandfather">Grandfather</SelectItem>
-                  <SelectItem value="grandmother">Grandmother</SelectItem>
+                  <SelectItem value="student">Student</SelectItem>
+                  <SelectItem value="teacher">Teacher</SelectItem>
                   <SelectItem value="brother">Brother</SelectItem>
                   <SelectItem value="sister">Sister</SelectItem>
 

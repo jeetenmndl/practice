@@ -71,7 +71,7 @@ export function ReComment({comment}) {
       else{
           toast({
               title: "Oops !",
-              description: "Some error occured ",
+              description: response.message,
               variant: "destructive",
           })
       }

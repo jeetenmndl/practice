@@ -45,6 +45,11 @@ const Page = async () => {
         <TabsContent value="private">
         <div className="grid grid-cols-2 gap-2">
         {
+          issues.data.private_issues.length == 0?
+          <div className='text-gray-600 font-semibold text-lg mt-12'>
+            No private Issues
+          </div>
+          :
           issues.data.private_issues.map((item,index)=>{
             return(
               <div  key={item.id}>

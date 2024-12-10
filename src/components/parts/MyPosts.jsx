@@ -8,6 +8,7 @@ import { useState } from "react"
 
 export default function MyPosts({data}) {
 
+
   function timeAgo(inputDateTime) {
     const now = new Date();
     const inputDate = new Date(inputDateTime);
@@ -78,9 +79,9 @@ export default function MyPosts({data}) {
           <div>
             {
               data.private?
-              <p className=" text-sm">21 • replies</p>
+              <p className=" text-sm">{data.reply_count} • replies • {data.preferredCharacter}</p>
               :
-              <p className=" text-sm">21 • comments</p>
+              <p className=" text-sm">{data.comments_count} • comments • {data.preferredCharacter}</p>
             }
           </div>
 

@@ -56,13 +56,6 @@ export default async function Page({params}) {
 
   return (
     <div className="max-w-2xl mx-auto p-4">
-      <div className="mb-4">
-        <Button variant="ghost" className="gap-2">
-          <ArrowLeft className="h-4 w-4" />
-          Back
-        </Button>
-      </div>
-
 
       <PostItem data={response.issue[0]} />
 
